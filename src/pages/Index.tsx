@@ -27,6 +27,7 @@ const Index = () => {
     .slice(0, 3);
 
   return (
+    <>
     <div className="space-y-6 animate-fade-in">
         {/* Welcome Section */}
         <div className="flex flex-col space-y-2">
@@ -240,14 +241,14 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Footer Info */}
+
         <div className="text-center text-sm text-muted-foreground bg-gradient-to-r from-transparent via-muted/20 to-transparent p-4 rounded-lg animate-fade-in">
           <div className="flex items-center justify-center gap-2">
             <Activity className="h-4 w-4 animate-pulse text-primary" />
             Last updated: {dashboardStats.lastUpdate} | INCOIS Ocean Hazard Monitoring Platform
           </div>
         </div>
-      </div>
+      </>
   );
 };
 

@@ -2,123 +2,172 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Enhanced Ocean/Government Theme - Professional Blue Palette 
+All colors are HSL for better manipulation and consistency.
 */
 
 @layer base {
   :root {
-    /* Ocean/Government Theme - Blue/Green Color Palette */
-    --background: 210 40% 98%;
-    --foreground: 215 20% 15%;
+    /* Enhanced Ocean/Government Theme - Deep Blue Color Palette */
+    --background: 220 50% 98%;
+    --foreground: 220 25% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 20% 15%;
+    --card-foreground: 220 25% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 20% 15%;
+    --popover-foreground: 220 25% 12%;
 
-    /* Primary: Ocean Blue */
-    --primary: 200 90% 35%;
+    /* Primary: Deep Ocean Blue */
+    --primary: 210 100% 45%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 200 85% 55%;
+    --primary-glow: 210 85% 65%;
+    --primary-light: 210 70% 88%;
 
     /* Secondary: Ocean Teal */
-    --secondary: 180 25% 90%;
-    --secondary-foreground: 180 50% 20%;
+    --secondary: 190 35% 88%;
+    --secondary-foreground: 190 65% 18%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 220 40% 96%;
+    --muted-foreground: 220 20% 45%;
 
-    /* Accent: Government Green */
-    --accent: 150 60% 45%;
+    /* Accent: Government Teal */
+    --accent: 175 70% 40%;
     --accent-foreground: 0 0% 100%;
+    --accent-light: 175 40% 85%;
 
-    --destructive: 0 84% 60%;
+    /* Status Colors */
+    --success: 145 70% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 35 85% 55%;
+    --warning-foreground: 0 0% 100%;
+    --destructive: 0 85% 58%;
     --destructive-foreground: 0 0% 100%;
+    --info: 200 90% 50%;
+    --info-foreground: 0 0% 100%;
 
-    --border: 215 15% 88%;
-    --input: 215 15% 88%;
-    --ring: 200 90% 35%;
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 210 100% 45%;
 
     --radius: 0.75rem;
 
-    /* Custom gradients and effects */
-    --gradient-ocean: linear-gradient(135deg, hsl(200 90% 35%), hsl(180 85% 40%));
-    --gradient-government: linear-gradient(135deg, hsl(150 60% 45%), hsl(200 90% 35%));
-    --gradient-hero: linear-gradient(135deg, hsl(200 90% 35%), hsl(150 60% 45%), hsl(180 85% 40%));
-    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(210 40% 98%));
-    --shadow-ocean: 0 10px 30px -10px hsl(200 90% 35% / 0.3);
-    --shadow-hover: 0 20px 40px -15px hsl(200 90% 35% / 0.4);
-    --shadow-card: 0 4px 20px -2px hsl(200 20% 50% / 0.1);
-    
+    /* Enhanced gradients and effects */
+    --gradient-ocean-primary: linear-gradient(135deg, hsl(210 100% 45%), hsl(200 85% 55%));
+    --gradient-ocean-secondary: linear-gradient(135deg, hsl(200 85% 55%), hsl(190 70% 45%));
+    --gradient-ocean-tertiary: linear-gradient(135deg, hsl(220 60% 60%), hsl(210 80% 40%));
+    --gradient-government: linear-gradient(135deg, hsl(175 70% 40%), hsl(210 100% 45%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 100% 45%) 0%, hsl(200 85% 55%) 25%, hsl(190 70% 45%) 50%, hsl(175 70% 40%) 75%, hsl(210 100% 45%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(220 50% 98%) 100%);
+    --gradient-card-hover: linear-gradient(135deg, hsl(220 50% 98%) 0%, hsl(210 40% 96%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(145 70% 40%), hsl(120 65% 45%));
+    --gradient-warning: linear-gradient(135deg, hsl(35 85% 55%), hsl(25 80% 50%));
+    --gradient-error: linear-gradient(135deg, hsl(0 85% 58%), hsl(350 80% 55%));
+    --gradient-info: linear-gradient(135deg, hsl(200 90% 50%), hsl(210 85% 55%));
+
+    /* Enhanced shadows with multiple layers */
+    --shadow-sm: 0 1px 2px 0 hsl(220 25% 12% / 0.05);
+    --shadow: 0 1px 3px 0 hsl(220 25% 12% / 0.1), 0 1px 2px -1px hsl(220 25% 12% / 0.1);
+    --shadow-md: 0 4px 6px -1px hsl(220 25% 12% / 0.1), 0 2px 4px -2px hsl(220 25% 12% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(220 25% 12% / 0.1), 0 4px 6px -4px hsl(220 25% 12% / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(220 25% 12% / 0.1), 0 8px 10px -6px hsl(220 25% 12% / 0.1);
+    --shadow-2xl: 0 25px 50px -12px hsl(220 25% 12% / 0.25);
+    --shadow-ocean: 0 10px 30px -10px hsl(210 100% 45% / 0.3);
+    --shadow-ocean-lg: 0 20px 40px -15px hsl(210 100% 45% / 0.4);
+    --shadow-hover: 0 25px 50px -12px hsl(210 100% 45% / 0.5);
+    --shadow-glow: 0 0 20px hsl(210 100% 45% / 0.3);
+    --shadow-glow-strong: 0 0 40px hsl(210 100% 45% / 0.6);
+
     /* Animation variables */
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    
-    /* Sidebar Ocean Theme */
-    --sidebar-background: 200 20% 95%;
-    --sidebar-foreground: 215 20% 25%;
-    --sidebar-primary: 200 90% 35%;
+    --transition-elastic: all 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    --transition-ocean-wave: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    /* Sidebar Enhanced Ocean Theme */
+    --sidebar-background: 220 40% 96%;
+    --sidebar-foreground: 220 25% 20%;
+    --sidebar-primary: 210 100% 45%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 200 15% 88%;
-    --sidebar-accent-foreground: 215 20% 25%;
-    --sidebar-border: 215 15% 85%;
-    --sidebar-ring: 200 90% 35%;
+    --sidebar-accent: 220 25% 92%;
+    --sidebar-accent-foreground: 220 25% 20%;
+    --sidebar-border: 220 15% 88%;
+    --sidebar-ring: 210 100% 45%;
   }
 
   .dark {
-    /* Dark Ocean/Government Theme */
-    --background: 215 30% 8%;
-    --foreground: 210 40% 95%;
+    /* Enhanced Dark Ocean/Government Theme */
+    --background: 220 35% 6%;
+    --foreground: 220 40% 96%;
 
-    --card: 215 25% 12%;
-    --card-foreground: 210 40% 95%;
+    --card: 220 30% 10%;
+    --card-foreground: 220 40% 96%;
 
-    --popover: 215 25% 12%;
-    --popover-foreground: 210 40% 95%;
+    --popover: 220 30% 10%;
+    --popover-foreground: 220 40% 96%;
 
-    /* Primary: Bright Ocean Blue */
-    --primary: 200 85% 55%;
-    --primary-foreground: 215 30% 8%;
-    --primary-glow: 200 90% 70%;
+    /* Primary: Luminous Ocean Blue */
+    --primary: 210 85% 60%;
+    --primary-foreground: 220 35% 6%;
+    --primary-glow: 210 90% 75%;
+    --primary-light: 210 40% 25%;
 
     /* Secondary: Dark Ocean Teal */
-    --secondary: 180 20% 18%;
-    --secondary-foreground: 180 40% 85%;
+    --secondary: 190 25% 20%;
+    --secondary-foreground: 190 50% 85%;
 
-    --muted: 215 25% 15%;
-    --muted-foreground: 215 15% 65%;
+    --muted: 220 25% 15%;
+    --muted-foreground: 220 20% 65%;
 
-    /* Accent: Bright Government Green */
-    --accent: 150 50% 55%;
-    --accent-foreground: 215 30% 8%;
+    /* Accent: Bright Government Teal */
+    --accent: 175 60% 55%;
+    --accent-foreground: 220 35% 6%;
+    --accent-light: 175 30% 25%;
 
-    --destructive: 0 75% 55%;
-    --destructive-foreground: 210 40% 95%;
+    /* Status Colors - Enhanced for dark theme */
+    --success: 145 60% 50%;
+    --success-foreground: 220 35% 6%;
+    --warning: 35 80% 60%;
+    --warning-foreground: 220 35% 6%;
+    --destructive: 0 80% 62%;
+    --destructive-foreground: 220 35% 6%;
+    --info: 200 85% 60%;
+    --info-foreground: 220 35% 6%;
 
-    --border: 215 20% 20%;
-    --input: 215 20% 20%;
-    --ring: 200 85% 55%;
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 210 85% 60%;
 
     /* Dark theme gradients */
-    --gradient-ocean: linear-gradient(135deg, hsl(200 85% 55%), hsl(180 75% 50%));
-    --gradient-government: linear-gradient(135deg, hsl(150 50% 55%), hsl(200 85% 55%));
-    --gradient-hero: linear-gradient(135deg, hsl(200 85% 55%), hsl(150 50% 55%), hsl(180 75% 50%));
-    --gradient-card: linear-gradient(135deg, hsl(215 25% 12%), hsl(215 30% 15%));
-    --shadow-ocean: 0 10px 30px -10px hsl(200 85% 55% / 0.4);
-    --shadow-hover: 0 20px 40px -15px hsl(200 85% 55% / 0.5);
-    --shadow-card: 0 4px 20px -2px hsl(200 30% 20% / 0.3);
-    
+    --gradient-ocean-primary: linear-gradient(135deg, hsl(210 85% 60%), hsl(200 75% 65%));
+    --gradient-ocean-secondary: linear-gradient(135deg, hsl(200 75% 65%), hsl(190 65% 55%));
+    --gradient-ocean-tertiary: linear-gradient(135deg, hsl(220 50% 45%), hsl(210 70% 50%));
+    --gradient-government: linear-gradient(135deg, hsl(175 60% 55%), hsl(210 85% 60%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 85% 60%) 0%, hsl(200 75% 65%) 25%, hsl(190 65% 55%) 50%, hsl(175 60% 55%) 75%, hsl(210 85% 60%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(220 30% 10%) 0%, hsl(220 25% 15%) 100%);
+    --gradient-card-hover: linear-gradient(135deg, hsl(220 25% 15%) 0%, hsl(210 30% 18%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(145 60% 50%), hsl(120 55% 55%));
+    --gradient-warning: linear-gradient(135deg, hsl(35 80% 60%), hsl(25 75% 58%));
+    --gradient-error: linear-gradient(135deg, hsl(0 80% 62%), hsl(350 75% 60%));
+    --gradient-info: linear-gradient(135deg, hsl(200 85% 60%), hsl(210 80% 65%));
+
+    /* Dark theme shadows */
+    --shadow-ocean: 0 10px 30px -10px hsl(210 85% 60% / 0.4);
+    --shadow-ocean-lg: 0 20px 40px -15px hsl(210 85% 60% / 0.5);
+    --shadow-hover: 0 25px 50px -12px hsl(210 85% 60% / 0.6);
+    --shadow-glow: 0 0 20px hsl(210 85% 60% / 0.4);
+    --shadow-glow-strong: 0 0 40px hsl(210 85% 60% / 0.7);
+
     /* Dark Sidebar */
-    --sidebar-background: 215 25% 10%;
-    --sidebar-foreground: 210 40% 90%;
-    --sidebar-primary: 200 85% 55%;
-    --sidebar-primary-foreground: 215 30% 8%;
-    --sidebar-accent: 215 20% 18%;
-    --sidebar-accent-foreground: 210 40% 90%;
-    --sidebar-border: 215 20% 18%;
-    --sidebar-ring: 200 85% 55%;
+    --sidebar-background: 220 30% 8%;
+    --sidebar-foreground: 220 40% 92%;
+    --sidebar-primary: 210 85% 60%;
+    --sidebar-primary-foreground: 220 35% 6%;
+    --sidebar-accent: 220 25% 16%;
+    --sidebar-accent-foreground: 220 40% 92%;
+    --sidebar-border: 220 20% 16%;
+    --sidebar-ring: 210 85% 60%;
   }
 }
 
@@ -128,53 +177,548 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Enhanced scrollbar styling */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-secondary/20;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/40 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/60;
   }
 }
 
 @layer components {
-  /* Animation utilities */
-  .animate-hover-lift {
-    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl;
+  /* Enhanced Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
   }
-  
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  .animate-slide-down {
+    animation: slideDown 0.5s ease-out;
+  }
+
+  .animate-slide-left {
+    animation: slideLeft 0.5s ease-out;
+  }
+
+  .animate-slide-right {
+    animation: slideRight 0.5s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  .animate-wave {
+    animation: wave 2s ease-in-out infinite;
+  }
+
+  .animate-ocean-flow {
+    animation: oceanFlow 4s ease-in-out infinite;
+  }
+
+  .animate-hover-lift {
+    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl;
+    transition: var(--transition-smooth);
+  }
+
+  .animate-hover-lift-lg {
+    @apply transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-2xl;
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .animate-hover-lift-lg:hover {
+    box-shadow: var(--shadow-hover);
+  }
+
   .animate-hover-scale {
     @apply transition-all duration-200 ease-out hover:scale-105;
+    transition: var(--transition-fast);
   }
-  
+
+  .animate-hover-scale-lg {
+    @apply transition-all duration-300 ease-out hover:scale-110;
+    transition: var(--transition-bounce);
+  }
+
   .animate-button-bounce {
     @apply transition-all duration-300 ease-out hover:scale-110 active:scale-95;
+    transition: var(--transition-bounce);
   }
-  
+
+  .animate-button-ocean {
+    @apply relative overflow-hidden;
+    background: var(--gradient-ocean-primary);
+    transition: var(--transition-ocean-wave);
+  }
+
+  .animate-button-ocean::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: var(--transition-ocean-wave);
+  }
+
+  .animate-button-ocean:hover::before {
+    left: 100%;
+  }
+
   .animate-card-glow {
-    @apply transition-all duration-300 ease-out hover:shadow-[0_20px_40px_-15px_hsl(var(--primary)/0.4)];
+    @apply transition-all duration-300 ease-out;
+    box-shadow: var(--shadow-md);
   }
-  
+
+  .animate-card-glow:hover {
+    box-shadow: var(--shadow-ocean-lg);
+    transform: translateY(-2px);
+  }
+
+  .animate-card-ocean {
+    @apply relative overflow-hidden;
+    background: var(--gradient-card);
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .animate-card-ocean::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--gradient-ocean-primary);
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: var(--transition-smooth);
+  }
+
+  .animate-card-ocean:hover::before {
+    opacity: 1;
+  }
+
   .animate-gradient {
+    background-size: 400% 400%;
+    animation: gradientShift 4s ease infinite;
+  }
+
+  .animate-gradient-fast {
     background-size: 200% 200%;
-    animation: gradient-shift 3s ease infinite;
+    animation: gradientShift 2s ease infinite;
   }
-  
-  @keyframes gradient-shift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+
+  .animate-pulse-border {
+    animation: pulseBorder 2s ease-in-out infinite;
   }
-  
-  /* Gradient backgrounds */
-  .bg-gradient-ocean {
-    background: var(--gradient-ocean);
+
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
   }
-  
+
+  /* Enhanced Gradient backgrounds */
+  .bg-gradient-ocean-primary {
+    background: var(--gradient-ocean-primary);
+  }
+
+  .bg-gradient-ocean-secondary {
+    background: var(--gradient-ocean-secondary);
+  }
+
+  .bg-gradient-ocean-tertiary {
+    background: var(--gradient-ocean-tertiary);
+  }
+
   .bg-gradient-government {
     background: var(--gradient-government);
   }
-  
+
   .bg-gradient-hero {
     background: var(--gradient-hero);
   }
-  
+
   .bg-gradient-card {
     background: var(--gradient-card);
+  }
+
+  .bg-gradient-card-hover {
+    background: var(--gradient-card-hover);
+  }
+
+  .bg-gradient-success {
+    background: var(--gradient-success);
+  }
+
+  .bg-gradient-warning {
+    background: var(--gradient-warning);
+  }
+
+  .bg-gradient-error {
+    background: var(--gradient-error);
+  }
+
+  .bg-gradient-info {
+    background: var(--gradient-info);
+  }
+
+  /* Enhanced Shadow utilities */
+  .shadow-ocean {
+    box-shadow: var(--shadow-ocean);
+  }
+
+  .shadow-ocean-lg {
+    box-shadow: var(--shadow-ocean-lg);
+  }
+
+  .shadow-hover {
+    box-shadow: var(--shadow-hover);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .shadow-glow-strong {
+    box-shadow: var(--shadow-glow-strong);
+  }
+
+  /* Glass morphism effects */
+  .glass {
+    @apply backdrop-blur-md bg-white/10 border border-white/20;
+  }
+
+  .glass-dark {
+    @apply backdrop-blur-md bg-black/10 border border-white/10;
+  }
+
+  .glass-ocean {
+    background: linear-gradient(135deg, hsla(210, 100%, 45%, 0.1), hsla(200, 85%, 55%, 0.1));
+    backdrop-filter: blur(12px);
+    border: 1px solid hsla(210, 100%, 45%, 0.2);
+  }
+
+  /* Status indicators */
+  .status-success {
+    @apply bg-gradient-success text-white;
+  }
+
+  .status-warning {
+    @apply bg-gradient-warning text-white;
+  }
+
+  .status-error {
+    @apply bg-gradient-error text-white;
+  }
+
+  .status-info {
+    @apply bg-gradient-info text-white;
+  }
+
+  /* Loading states */
+  .loading-skeleton {
+    background: linear-gradient(90deg, hsl(220, 40%, 96%) 25%, hsl(220, 50%, 98%) 50%, hsl(220, 40%, 96%) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  .loading-dots::after {
+    content: '';
+    animation: dots 1.5s steps(4, end) infinite;
+  }
+
+  /* Interactive elements */
+  .interactive {
+    @apply cursor-pointer select-none;
+    transition: var(--transition-smooth);
+  }
+
+  .interactive:hover {
+    transform: translateY(-1px);
+  }
+
+  .interactive:active {
+    transform: translateY(0);
+  }
+
+  /* Typography enhancements */
+  .text-gradient-ocean {
+    background: var(--gradient-ocean-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-government {
+    background: var(--gradient-government);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+  }
+
+  .text-glow-strong {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.8);
+  }
+}
+
+@layer utilities {
+  /* Custom keyframe animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideLeft {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideRight {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% {
+      box-shadow: 0 0 5px hsl(var(--primary) / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.8), 0 0 30px hsl(var(--primary) / 0.4);
+    }
+  }
+
+  @keyframes wave {
+    0% {
+      transform: rotate(0deg);
+    }
+    10% {
+      transform: rotate(14deg);
+    }
+    20% {
+      transform: rotate(-8deg);
+    }
+    30% {
+      transform: rotate(14deg);
+    }
+    40% {
+      transform: rotate(-4deg);
+    }
+    50% {
+      transform: rotate(10deg);
+    }
+    60% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes oceanFlow {
+    0%, 100% {
+      transform: translateX(0px) translateY(0px);
+    }
+    25% {
+      transform: translateX(5px) translateY(-5px);
+    }
+    50% {
+      transform: translateX(-2px) translateY(-2px);
+    }
+    75% {
+      transform: translateX(-5px) translateY(2px);
+    }
+  }
+
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes pulseBorder {
+    0%, 100% {
+      border-color: hsl(var(--primary) / 0.3);
+    }
+    50% {
+      border-color: hsl(var(--primary) / 1);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  @keyframes loading {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  @keyframes dots {
+    0% { content: ''; }
+    25% { content: '.'; }
+    50% { content: '..'; }
+    75% { content: '...'; }
+  }
+
+  /* Responsive utilities */
+  .container-ocean {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .grid-ocean {
+    @apply grid gap-4 sm:gap-6 lg:gap-8;
+  }
+
+  /* Focus states */
+  .focus-ocean {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background;
+  }
+
+  .focus-ocean-inset {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-ocean {
+    color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+/* Motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  :root {
+    --border: 220 50% 30%;
+    --input: 220 50% 30%;
+  }
+  
+  .dark {
+    --border: 220 40% 70%;
+    --input: 220 40% 70%;
   }
 }
