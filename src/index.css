@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Ocean/Government Theme - Blue/Green Color Palette */
+    --background: 210 40% 98%;
+    --foreground: 215 20% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 20% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 20% 15%;
+
+    /* Primary: Ocean Blue */
+    --primary: 200 90% 35%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 200 85% 55%;
+
+    /* Secondary: Ocean Teal */
+    --secondary: 180 25% 90%;
+    --secondary-foreground: 180 50% 20%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Accent: Government Green */
+    --accent: 150 60% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 15% 88%;
+    --input: 215 15% 88%;
+    --ring: 200 90% 35%;
+
+    --radius: 0.75rem;
+
+    /* Custom gradients and effects */
+    --gradient-ocean: linear-gradient(135deg, hsl(200 90% 35%), hsl(180 85% 40%));
+    --gradient-government: linear-gradient(135deg, hsl(150 60% 45%), hsl(200 90% 35%));
+    --gradient-hero: linear-gradient(135deg, hsl(200 90% 35%), hsl(150 60% 45%), hsl(180 85% 40%));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(210 40% 98%));
+    --shadow-ocean: 0 10px 30px -10px hsl(200 90% 35% / 0.3);
+    --shadow-hover: 0 20px 40px -15px hsl(200 90% 35% / 0.4);
+    --shadow-card: 0 4px 20px -2px hsl(200 20% 50% / 0.1);
+    
+    /* Animation variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Sidebar Ocean Theme */
+    --sidebar-background: 200 20% 95%;
+    --sidebar-foreground: 215 20% 25%;
+    --sidebar-primary: 200 90% 35%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 200 15% 88%;
+    --sidebar-accent-foreground: 215 20% 25%;
+    --sidebar-border: 215 15% 85%;
+    --sidebar-ring: 200 90% 35%;
+  }
+
+  .dark {
+    /* Dark Ocean/Government Theme */
+    --background: 215 30% 8%;
+    --foreground: 210 40% 95%;
+
+    --card: 215 25% 12%;
+    --card-foreground: 210 40% 95%;
+
+    --popover: 215 25% 12%;
+    --popover-foreground: 210 40% 95%;
+
+    /* Primary: Bright Ocean Blue */
+    --primary: 200 85% 55%;
+    --primary-foreground: 215 30% 8%;
+    --primary-glow: 200 90% 70%;
+
+    /* Secondary: Dark Ocean Teal */
+    --secondary: 180 20% 18%;
+    --secondary-foreground: 180 40% 85%;
+
+    --muted: 215 25% 15%;
+    --muted-foreground: 215 15% 65%;
+
+    /* Accent: Bright Government Green */
+    --accent: 150 50% 55%;
+    --accent-foreground: 215 30% 8%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 210 40% 95%;
+
+    --border: 215 20% 20%;
+    --input: 215 20% 20%;
+    --ring: 200 85% 55%;
+
+    /* Dark theme gradients */
+    --gradient-ocean: linear-gradient(135deg, hsl(200 85% 55%), hsl(180 75% 50%));
+    --gradient-government: linear-gradient(135deg, hsl(150 50% 55%), hsl(200 85% 55%));
+    --gradient-hero: linear-gradient(135deg, hsl(200 85% 55%), hsl(150 50% 55%), hsl(180 75% 50%));
+    --gradient-card: linear-gradient(135deg, hsl(215 25% 12%), hsl(215 30% 15%));
+    --shadow-ocean: 0 10px 30px -10px hsl(200 85% 55% / 0.4);
+    --shadow-hover: 0 20px 40px -15px hsl(200 85% 55% / 0.5);
+    --shadow-card: 0 4px 20px -2px hsl(200 30% 20% / 0.3);
+    
+    /* Dark Sidebar */
+    --sidebar-background: 215 25% 10%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 200 85% 55%;
+    --sidebar-primary-foreground: 215 30% 8%;
+    --sidebar-accent: 215 20% 18%;
+    --sidebar-accent-foreground: 210 40% 90%;
+    --sidebar-border: 215 20% 18%;
+    --sidebar-ring: 200 85% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  /* Animation utilities */
+  .animate-hover-lift {
+    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl;
+  }
+  
+  .animate-hover-scale {
+    @apply transition-all duration-200 ease-out hover:scale-105;
+  }
+  
+  .animate-button-bounce {
+    @apply transition-all duration-300 ease-out hover:scale-110 active:scale-95;
+  }
+  
+  .animate-card-glow {
+    @apply transition-all duration-300 ease-out hover:shadow-[0_20px_40px_-15px_hsl(var(--primary)/0.4)];
+  }
+  
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+  }
+  
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* Gradient backgrounds */
+  .bg-gradient-ocean {
+    background: var(--gradient-ocean);
+  }
+  
+  .bg-gradient-government {
+    background: var(--gradient-government);
+  }
+  
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .bg-gradient-card {
+    background: var(--gradient-card);
+  }
+}
