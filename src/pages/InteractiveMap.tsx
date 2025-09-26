@@ -74,7 +74,7 @@ const mockHazardReports: HazardReport[] = [
   }
 ];
 
-import WebsiteHeader from '@/components/WebsiteHeader';
+import EnhancedMap from '@/components/EnhancedMap';
 
 const InteractiveMap: React.FC = () => {
   const [selectedReport, setSelectedReport] = useState<HazardReport | null>(null);
@@ -82,6 +82,9 @@ const InteractiveMap: React.FC = () => {
   const [severityFilter, setSeverityFilter] = useState('all');
   const [hazardTypeFilter, setHazardTypeFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [showWeatherLayer, setShowWeatherLayer] = useState(false);
+  const [showWaveLayer, setShowWaveLayer] = useState(false);
+  const [showWindLayer, setShowWindLayer] = useState(false);
   const mapRef = useRef<HTMLDivElement>(null);
 
   const getHazardIcon = (type: string) => {
@@ -123,33 +126,33 @@ const InteractiveMap: React.FC = () => {
   });
 
   return (
-    <>
-      <WebsiteHeader />
-      <div className="space-y-6 px-4 max-w-7xl mx-auto py-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">Interactive Hazard Map</h1>
-          <p className="text-muted-foreground">
-            Real-time visualization of coastal hazards across the Indian Ocean
-          </p>
+    <div className="space-y-6 animate-fade-in">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold bg-gradient-hero bg-clip-text text-transparent animate-gradient">
+              Interactive Hazard Map
+            </h1>
+            <p className="text-muted-foreground">
+              Real-time visualization of coastal hazards across the Indian Ocean
+            </p>
+          </div>
+          <Button className="flex items-center gap-2 animate-button-bounce">
+            <Navigation className="h-4 w-4" />
+            Get Current Location
+          </Button>
         </div>
-        <Button className="flex items-center gap-2">
-          <Navigation className="h-4 w-4" />
-          Get Current Location
-        </Button>
-      </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* Map Controls */}
-        <div className="lg:col-span-1 space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Filter className="h-5 w-5" />
-                Map Controls
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          {/* Map Controls */}
+          <div className="lg:col-span-1 space-y-4">
+            <Card className="animate-hover-lift">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Filter className="h-5 w-5 text-primary" />
+                  Map Controls
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
               {/* Search */}
               <div className="space-y-2">
                 <label className="text-sm font-medium">Search Location</label>
@@ -216,42 +219,57 @@ const InteractiveMap: React.FC = () => {
                 </Select>
               </div>
 
-              {/* Layer Toggles */}
-              <div className="space-y-3">
-                <label className="text-sm font-medium">Overlay Layers</label>
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Weather Conditions</span>
-                    <Button variant="outline" size="sm">
-                      <Thermometer className="h-4 w-4" />
-                    </Button>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Wind Patterns</span>
-                    <Button variant="outline" size="sm">
-                      <Wind className="h-4 w-4" />
-                    </Button>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Wave Heights</span>
-                    <Button variant="outline" size="sm">
-                      <Waves className="h-4 w-4" />
-                    </Button>
+                {/* Layer Toggles */}
+                <div className="space-y-3">
+                  <label className="text-sm font-medium">Overlay Layers</label>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm">Weather Conditions</span>
+                      <Button 
+                        variant={showWeatherLayer ? "default" : "outline"} 
+                        size="sm"
+                        onClick={() => setShowWeatherLayer(!showWeatherLayer)}
+                        className="animate-hover-scale"
+                      >
+                        <Thermometer className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm">Wind Patterns</span>
+                      <Button 
+                        variant={showWindLayer ? "default" : "outline"} 
+                        size="sm"
+                        onClick={() => setShowWindLayer(!showWindLayer)}
+                        className="animate-hover-scale"
+                      >
+                        <Wind className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm">Wave Heights</span>
+                      <Button 
+                        variant={showWaveLayer ? "default" : "outline"} 
+                        size="sm"
+                        onClick={() => setShowWaveLayer(!showWaveLayer)}
+                        className="animate-hover-scale"
+                      >
+                        <Waves className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
             </CardContent>
           </Card>
 
-          {/* Legend */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Info className="h-5 w-5" />
-                Map Legend
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
+            {/* Legend */}
+            <Card className="animate-hover-lift">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Info className="h-5 w-5 text-primary" />
+                  Map Legend
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
               <div className="space-y-2">
                 <div className="text-sm font-medium">Severity Levels</div>
                 {[5, 4, 3, 2, 1].map(level => (
@@ -280,77 +298,30 @@ const InteractiveMap: React.FC = () => {
           </Card>
         </div>
 
-        {/* Main Map Area */}
-        <div className="lg:col-span-3 space-y-4">
-          {/* Map Container */}
-          <Card className="relative">
-            <CardContent className="p-0">
-              <div 
-                ref={mapRef}
-                className="h-96 bg-gradient-to-br from-blue-400 to-blue-600 relative overflow-hidden rounded-lg"
-              >
-                {/* Mock Map Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600">
-                  <div className="absolute inset-0 opacity-20">
-                    <div className="absolute top-10 left-20 w-32 h-24 bg-green-600 rounded-lg opacity-70" />
-                    <div className="absolute top-32 left-40 w-28 h-20 bg-green-700 rounded-lg opacity-60" />
-                    <div className="absolute top-20 right-32 w-24 h-18 bg-yellow-600 rounded-lg opacity-50" />
-                  </div>
-                </div>
+          {/* Main Map Area */}
+          <div className="lg:col-span-3 space-y-4">
+            {/* Enhanced Map Container */}
+            <div className="h-[600px]">
+              <EnhancedMap 
+                selectedReport={selectedReport}
+                onReportSelect={setSelectedReport}
+                mapStyle={mapLayer as any}
+                showWeatherLayer={showWeatherLayer}
+                showWaveLayer={showWaveLayer}
+                showWindLayer={showWindLayer}
+              />
+            </div>
 
-                {/* Hazard Markers */}
-                {filteredReports.map((report, index) => (
-                  <div
-                    key={report.id}
-                    className="absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2 animate-pulse"
-                    style={{
-                      left: `${20 + index * 15}%`,
-                      top: `${30 + index * 10}%`
-                    }}
-                    onClick={() => setSelectedReport(report)}
-                  >
-                    <div className={`w-8 h-8 rounded-full ${getSeverityColor(report.severity)} flex items-center justify-center text-white text-xs font-bold shadow-lg`}>
-                      {report.severity}
-                    </div>
-                    <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs bg-background px-2 py-1 rounded shadow-md whitespace-nowrap">
-                      {report.location.name}
-                    </div>
-                  </div>
-                ))}
-
-                {/* Map Controls */}
-                <div className="absolute top-4 right-4 flex flex-col gap-2">
-                  <Button variant="secondary" size="sm">
-                    <Maximize className="h-4 w-4" />
-                  </Button>
-                  <Button variant="secondary" size="sm">
-                    <Layers className="h-4 w-4" />
-                  </Button>
-                  <Button variant="secondary" size="sm">
-                    <Eye className="h-4 w-4" />
-                  </Button>
-                </div>
-
-                {/* Current Layer Indicator */}
-                <div className="absolute bottom-4 left-4">
-                  <Badge variant="secondary">
-                    {mapLayer.charAt(0).toUpperCase() + mapLayer.slice(1)} View
-                  </Badge>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Report Details */}
-          {selectedReport && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <AlertTriangle className="h-5 w-5" />
-                  Hazard Report Details
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
+            {/* Report Details */}
+            {selectedReport && (
+              <Card className="animate-scale-in animate-hover-lift">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <AlertTriangle className="h-5 w-5 text-destructive animate-pulse" />
+                    Hazard Report Details
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-3">
                     <div>
@@ -392,35 +363,35 @@ const InteractiveMap: React.FC = () => {
                   <span className="text-sm font-medium text-muted-foreground">Description:</span>
                   <p className="mt-1 text-sm">{selectedReport.description}</p>
                 </div>
-                <div className="mt-4 flex gap-2">
-                  <Button size="sm">View Full Report</Button>
-                  <Button variant="outline" size="sm">Share Location</Button>
-                  <Button variant="outline" size="sm" onClick={() => setSelectedReport(null)}>
-                    Close
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          )}
+                  <div className="mt-4 flex gap-2">
+                    <Button size="sm" className="animate-button-bounce">View Full Report</Button>
+                    <Button variant="outline" size="sm" className="animate-hover-scale">Share Location</Button>
+                    <Button variant="outline" size="sm" onClick={() => setSelectedReport(null)} className="animate-hover-scale">
+                      Close
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
 
-          {/* Active Reports Summary */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Card>
-              <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-red-600">{filteredReports.filter(r => r.severity >= 4).length}</div>
-                <div className="text-sm text-muted-foreground">High Severity</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-yellow-600">{filteredReports.filter(r => r.severity === 3).length}</div>
-                <div className="text-sm text-muted-foreground">Medium Severity</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-green-600">{filteredReports.filter(r => r.severity <= 2).length}</div>
-                <div className="text-sm text-muted-foreground">Low Severity</div>
+            {/* Active Reports Summary */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <Card className="animate-hover-lift animate-card-glow">
+                <CardContent className="p-4 text-center">
+                  <div className="text-2xl font-bold text-red-600 animate-pulse">{filteredReports.filter(r => r.severity >= 4).length}</div>
+                  <div className="text-sm text-muted-foreground">High Severity</div>
+                </CardContent>
+              </Card>
+              <Card className="animate-hover-lift animate-card-glow">
+                <CardContent className="p-4 text-center">
+                  <div className="text-2xl font-bold text-yellow-600">{filteredReports.filter(r => r.severity === 3).length}</div>
+                  <div className="text-sm text-muted-foreground">Medium Severity</div>
+                </CardContent>
+              </Card>
+              <Card className="animate-hover-lift animate-card-glow">
+                <CardContent className="p-4 text-center">
+                  <div className="text-2xl font-bold text-green-600">{filteredReports.filter(r => r.severity <= 2).length}</div>
+                  <div className="text-sm text-muted-foreground">Low Severity</div>
               </CardContent>
             </Card>
             <Card>

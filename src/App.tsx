@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { AppProvider } from "@/contexts/AppContext";
 import { NotificationProvider } from "@/contexts/NotificationContext";
+import DashboardLayout from "@/components/DashboardLayout";
 import Index from "./pages/Index";
 import InteractiveMap from "./pages/InteractiveMap";
 import ReportHazard from "./pages/ReportHazard";
@@ -27,17 +28,19 @@ const App: React.FC = () => {
               <Toaster />
               <Sonner />
               <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/map" element={<InteractiveMap />} />
-                <Route path="/report" element={<ReportHazard />} />
-                <Route path="/analytics" element={<Analytics />} />
-                <Route path="/social" element={<SocialMonitor />} />
-                <Route path="/reports" element={<ReportsReview />} />
-                <Route path="/admin" element={<Admin />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+                <DashboardLayout>
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/map" element={<InteractiveMap />} />
+                    <Route path="/report" element={<ReportHazard />} />
+                    <Route path="/analytics" element={<Analytics />} />
+                    <Route path="/social" element={<SocialMonitor />} />
+                    <Route path="/reports" element={<ReportsReview />} />
+                    <Route path="/admin" element={<Admin />} />
+                    {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </DashboardLayout>
               </BrowserRouter>
             </TooltipProvider>
           </NotificationProvider>
