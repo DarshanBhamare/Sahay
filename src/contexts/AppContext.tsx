@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, type ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 
 export type ThemeMode = 'light' | 'dark' | 'system';
 
@@ -40,7 +40,7 @@ interface AppProviderProps {
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [state, setState] = useState<AppState>({
     sidebarCollapsed: false,
-    theme: 'system',
+    theme: 'dark',
     highContrast: false,
     language: 'en',
     notifications: {
@@ -49,6 +49,20 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       email: false,
     },
   });
+
+  // Apply current theme once on mount so default dark takes effect
+  useEffect(() => {
+    const root = document.documentElement;
+    if (state.theme === 'dark') {
+      root.classList.add('dark');
+    } else if (state.theme === 'light') {
+      root.classList.remove('dark');
+    } else {
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (isDark) root.classList.add('dark');
+      else root.classList.remove('dark');
+    }
+  }, []);
 
   const toggleSidebar = () => {
     setState(prev => ({ ...prev, sidebarCollapsed: !prev.sidebarCollapsed }));

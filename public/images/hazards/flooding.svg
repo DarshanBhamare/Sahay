@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+  <defs>
+    <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#22d3ee" />
+      <stop offset="100%" stop-color="#115e59" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="url(#g)"/>
+  <g>
+    <path d="M0 340 Q100 320 200 340 T400 340 T600 340 T800 340 V480 H0 Z" fill="#a5f3fc"/>
+    <path d="M0 370 Q100 350 200 370 T400 370 T600 370 T800 370 V480 H0 Z" fill="#67e8f9"/>
+    <path d="M0 400 Q100 380 200 400 T400 400 T600 400 T800 400 V480 H0 Z" fill="#22d3ee"/>
+  </g>
+  <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700" fill="#083344">Coastal Flooding</text>
+  <text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#022c22">Dummy placeholder image</text>
+</svg>

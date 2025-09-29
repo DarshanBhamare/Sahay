@@ -15,6 +15,7 @@ import SocialMonitor from "./pages/SocialMonitor";
 import ReportsReview from "./pages/ReportsReview";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
+import About from "./pages/About";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App: React.FC = () => {
                     <Route path="/" element={<Index />} />
                     <Route path="/map" element={<InteractiveMap />} />
                     <Route path="/report" element={<ReportHazard />} />
+                    <Route path="/about" element={<About />} />
                     <Route path="/analytics" element={<Analytics />} />
                     <Route path="/social" element={<SocialMonitor />} />
                     <Route path="/reports" element={<ReportsReview />} />

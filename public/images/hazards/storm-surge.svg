@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+  <defs>
+    <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#1d4ed8" />
+      <stop offset="100%" stop-color="#0b1025" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="url(#g)"/>
+  <g opacity="0.35">
+    <rect x="0" y="0" width="800" height="180" fill="#0f172a"/>
+    <g fill="#e5e7eb">
+      <circle cx="620" cy="80" r="40"/>
+      <circle cx="660" cy="80" r="20"/>
+    </g>
+  </g>
+  <g>
+    <path d="M0 360 Q140 300 280 360 T560 360 T840 360 V480 H0 Z" fill="#64748b"/>
+    <path d="M0 380 Q140 320 280 380 T560 380 T840 380 V480 H0 Z" fill="#94a3b8"/>
+  </g>
+  <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700" fill="#ffffff">Storm Surge</text>
+  <text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#cbd5e1">Dummy placeholder image</text>
+</svg>

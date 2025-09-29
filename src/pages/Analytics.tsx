@@ -5,21 +5,19 @@ import SentimentGauge from '@/components/analytics/SentimentGauge';
 import TrendingTopics from '@/components/analytics/TrendingTopics';
 import EngagementCharts from '@/components/analytics/EngagementCharts';
 import { BarChart3, TrendingUp, MessageSquare, Users } from 'lucide-react';
-import WebsiteHeader from '@/components/WebsiteHeader';
 
 const Analytics: React.FC = () => {
   return (
     <>
-      <WebsiteHeader />
       <div className="space-y-6 px-4 max-w-7xl mx-auto py-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">Social Media Analytics</h1>
-          <p className="text-muted-foreground">
-            Monitor social media activity and public sentiment in real-time
-          </p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold">Social Media Analytics</h1>
+            <p className="text-muted-foreground">
+              Monitor social media activity and public sentiment in real-time
+            </p>
+          </div>
         </div>
-      </div>
 
       <Tabs defaultValue="overview" className="space-y-6">
         <TabsList className="grid w-full grid-cols-4">

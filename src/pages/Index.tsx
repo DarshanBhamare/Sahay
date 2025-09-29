@@ -7,6 +7,8 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useNotifications } from '@/contexts/NotificationContext';
 import RealTimeAlerts from '@/components/RealTimeAlerts';
 import WeatherWidget from '@/components/WeatherWidget';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Index = () => {
   const { user } = useAuth();
@@ -29,13 +31,33 @@ const Index = () => {
   return (
     <>
     <div className="space-y-6 animate-fade-in">
-        {/* Welcome Section */}
-        <div className="flex flex-col space-y-2">
-          <h1 className="text-3xl font-bold tracking-tight">
-            Welcome back, {user?.name?.split(' ')[0] || 'User'}
-          </h1>
+        {/* Hero Section for SIH25039 */}
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 p-8 text-white shadow-lg">
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1505761671935-60b3a7427bad?q=80&w=2070&auto=format&fit=crop')] opacity-15 bg-cover bg-center" />
+          <div className="relative z-10 grid gap-6 md:grid-cols-3 items-center">
+            <div className="md:col-span-2 space-y-3">
+              <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">INCOIS Ocean Hazard Platform</h1>
+              <p className="text-blue-100 max-w-2xl">
+                Integrated Platform for Crowdsourced Ocean Hazard Reporting and Social Media Analytics. Report hazards, explore live maps, and monitor public signals in real time.
+              </p>
+              <div className="flex flex-wrap gap-3 mt-2">
+                <Badge variant="outline" className="bg-white/15 border-white/30">Disaster Management</Badge>
+                <Badge variant="outline" className="bg-white/15 border-white/30">Ministry of Earth Sciences</Badge>
+                <Badge variant="outline" className="bg-white/15 border-white/30">INCOIS</Badge>
+              </div>
+            </div>
+            <div className="flex md:justify-end gap-3">
+              <Link to="/map">
+                <Button size="lg" variant="secondary" className="bg-white/20 border-white/30 text-white hover:bg-white/30">View Map</Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Welcome Section (heading removed as requested) */}
+        <div className="mt-2">
           <p className="text-muted-foreground text-blue-600">
-            Monitor ocean hazards and coastal safety across the Indian Ocean region
+            Monitor ocean hazards and coastal safety across the Indian coastline
           </p>
         </div>
 
@@ -45,64 +67,71 @@ const Index = () => {
             <AlertTriangle className="h-4 w-4 text-destructive" />
             <AlertDescription className="text-destructive">
               <span className="font-medium">{recentAlerts.length} critical alert(s) require attention.</span>
-              {recentAlerts.map(alert => (
-                <div key={alert.id} className="mt-1 text-sm">
-                  • {alert.title} - {alert.location?.name}
-                </div>
-              ))}
             </AlertDescription>
           </Alert>
         )}
 
         {/* Key Metrics */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card className="animate-hover-lift animate-card-glow">
+          {/* Active Alerts */}
+          <Card className="animate-hover-lift shadow-lg ring-1 ring-red-200/40 dark:ring-red-900/30 bg-gradient-to-br from-rose-50 to-red-50 dark:from-rose-950/30 dark:to-red-950/20">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Alerts</CardTitle>
-              <AlertTriangle className="h-4 w-4 text-destructive animate-pulse" />
+              <CardTitle className="text-sm font-semibold text-red-700 dark:text-rose-200">Active Alerts</CardTitle>
+              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-red-100 text-red-700 dark:bg-red-900/50 dark:text-red-200">
+                <AlertTriangle className="h-4 w-4" />
+              </span>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-destructive">{dashboardStats.activeAlerts}</div>
-              <p className="text-xs text-muted-foreground">Requiring immediate attention</p>
+              <div className="text-3xl font-extrabold text-red-700 dark:text-red-200">{dashboardStats.activeAlerts}</div>
+              <p className="text-xs text-red-700/70 dark:text-rose-200/70">Requiring immediate attention</p>
             </CardContent>
           </Card>
 
-          <Card className="animate-hover-lift animate-card-glow">
+          {/* Reports Today */}
+          <Card className="animate-hover-lift shadow-lg ring-1 ring-emerald-200/40 dark:ring-emerald-900/30 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/20">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Reports Today</CardTitle>
-              <BarChart3 className="h-4 w-4 text-primary" />
+              <CardTitle className="text-sm font-semibold text-emerald-700 dark:text-emerald-200">Reports Today</CardTitle>
+              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-200">
+                <BarChart3 className="h-4 w-4" />
+              </span>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{dashboardStats.reportsToday}</div>
-              <p className="text-xs text-muted-foreground">
-                <TrendingUp className="h-3 w-3 inline mr-1 text-green-500" />
+              <div className="text-3xl font-extrabold text-emerald-800 dark:text-emerald-200">{dashboardStats.reportsToday}</div>
+              <p className="text-xs text-emerald-700/70 dark:text-emerald-200/70">
+                <TrendingUp className="h-3 w-3 inline mr-1 text-green-600" />
                 +12% from yesterday
               </p>
             </CardContent>
           </Card>
 
-          <Card className="animate-hover-lift animate-card-glow">
+          {/* Active Users */}
+          <Card className="animate-hover-lift shadow-lg ring-1 ring-sky-200/40 dark:ring-sky-900/30 bg-gradient-to-br from-sky-50 to-indigo-50 dark:from-sky-950/30 dark:to-indigo-950/20">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Users</CardTitle>
-              <Users className="h-4 w-4 text-accent" />
+              <CardTitle className="text-sm font-semibold text-sky-700 dark:text-sky-200">Active Users</CardTitle>
+              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-sky-100 text-sky-700 dark:bg-sky-900/50 dark:text-sky-200">
+                <Users className="h-4 w-4" />
+              </span>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{dashboardStats.activeUsers}</div>
-              <p className="text-xs text-muted-foreground">
-                <div className="h-1 w-1 bg-green-500 rounded-full inline-block mr-1 animate-pulse"></div>
+              <div className="text-3xl font-extrabold text-sky-800 dark:text-sky-200">{dashboardStats.activeUsers}</div>
+              <p className="text-xs text-sky-700/70 dark:text-sky-200/70">
+                <span className="inline-block mr-1 h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
                 Online now
               </p>
             </CardContent>
           </Card>
 
-          <Card className="animate-hover-lift animate-card-glow">
+          {/* System Health */}
+          <Card className="animate-hover-lift shadow-lg ring-1 ring-violet-200/40 dark:ring-violet-900/30 bg-gradient-to-br from-violet-50 to-fuchsia-50 dark:from-violet-950/30 dark:to-fuchsia-950/20">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">System Health</CardTitle>
-              <Activity className="h-4 w-4 text-accent animate-pulse" />
+              <CardTitle className="text-sm font-semibold text-violet-700 dark:text-violet-200">System Health</CardTitle>
+              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-violet-100 text-violet-700 dark:bg-violet-900/50 dark:text-violet-200">
+                <Activity className="h-4 w-4" />
+              </span>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{dashboardStats.systemHealth}%</div>
-              <p className="text-xs text-muted-foreground">All systems operational</p>
+              <div className="text-3xl font-extrabold text-violet-800 dark:text-violet-200">{dashboardStats.systemHealth}%</div>
+              <p className="text-xs text-violet-700/70 dark:text-violet-200/70">All systems operational</p>
             </CardContent>
           </Card>
         </div>
@@ -113,15 +142,13 @@ const Index = () => {
           <div className="lg:col-span-1">
             <RealTimeAlerts />
           </div>
-          
           {/* Weather Widget */}
           <div className="lg:col-span-1">
             <WeatherWidget />
           </div>
-          
           {/* Recent Activity */}
           <div className="lg:col-span-1">
-            <Card className="animate-hover-lift">
+            <Card className="animate-hover-lift ring-1 ring-muted/40 dark:ring-muted/20">
               <CardHeader>
                 <CardTitle>Recent Hazard Reports</CardTitle>
                 <CardDescription>Latest reports from coastal monitoring stations</CardDescription>
@@ -147,107 +174,108 @@ const Index = () => {
                   </div>
                   <Badge variant="secondary">Medium</Badge>
                 </div>
-                <div className="flex items-center space-x-4 animate-hover-lift">
-                  <div className="flex h-2 w-2 rounded-full bg-yellow-500" />
-                  <div className="flex-1 space-y-1">
-                    <p className="text-sm font-medium">Storm surge warning - Odisha</p>
-                    <p className="text-xs text-muted-foreground">
-                      Low pressure area, reported 6 hours ago
-                    </p>
-                  </div>
-                  <Badge variant="outline">Low</Badge>
-                </div>
               </CardContent>
             </Card>
           </div>
         </div>
-        
-        {/* Geographic Coverage */}
+
+        {/* Primary CTAs */}
+        <div className="grid gap-4 md:grid-cols-2">
+          <Card className="animate-hover-lift border border-emerald-200/60 dark:border-emerald-900/40 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/10">
+            <CardHeader>
+              <CardTitle>Interactive Map</CardTitle>
+              <CardDescription>View hotspots and verified incidents</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Link to="/map"><Button variant="outline" className="w-full">Open Live Map</Button></Link>
+            </CardContent>
+          </Card>
+          <Card className="animate-hover-lift border border-sky-200/60 dark:border-sky-900/40 bg-gradient-to-br from-sky-50 to-indigo-50 dark:from-sky-950/20 dark:to-indigo-950/10">
+            <CardHeader>
+              <CardTitle>Social Media Monitor</CardTitle>
+              <CardDescription>NLP-driven trends and sentiment</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Link to="/social"><Button variant="secondary" className="w-full">Open Monitor</Button></Link>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Geographic Coverage + Quick Actions */}
         <div className="grid gap-4 md:grid-cols-2">
           <Card className="animate-hover-lift">
-              <CardHeader>
-                <CardTitle>Geographic Coverage</CardTitle>
-                <CardDescription>Monitoring stations across Indian coastal states</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center justify-between animate-hover-lift">
-                  <div className="flex items-center space-x-2">
-                    <MapPin className="h-4 w-4 text-primary animate-pulse" />
-                    <span className="text-sm">Gujarat Coast</span>
-                  </div>
-                  <Badge variant="default" className="animate-hover-scale">24 stations</Badge>
+            <CardHeader>
+              <CardTitle>Geographic Coverage</CardTitle>
+              <CardDescription>Monitoring stations across Indian coastal states</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between animate-hover-lift">
+                <div className="flex items-center space-x-2">
+                  <MapPin className="h-4 w-4 text-primary animate-pulse" />
+                  <span className="text-sm">Gujarat Coast</span>
                 </div>
-                <div className="flex items-center justify-between animate-hover-lift">
-                  <div className="flex items-center space-x-2">
-                    <MapPin className="h-4 w-4 text-primary animate-pulse" />
-                    <span className="text-sm">Tamil Nadu</span>
-                  </div>
-                  <Badge variant="default" className="animate-hover-scale">31 stations</Badge>
+                <Badge variant="default" className="animate-hover-scale">24 stations</Badge>
+              </div>
+              <div className="flex items-center justify-between animate-hover-lift">
+                <div className="flex items-center space-x-2">
+                  <MapPin className="h-4 w-4 text-primary animate-pulse" />
+                  <span className="text-sm">Tamil Nadu</span>
                 </div>
-                <div className="flex items-center justify-between animate-hover-lift">
-                  <div className="flex items-center space-x-2">
-                    <MapPin className="h-4 w-4 text-primary animate-pulse" />
-                    <span className="text-sm">Kerala</span>
-                  </div>
-                  <Badge variant="default" className="animate-hover-scale">18 stations</Badge>
+                <Badge variant="default" className="animate-hover-scale">31 stations</Badge>
+              </div>
+              <div className="flex items-center justify-between animate-hover-lift">
+                <div className="flex items-center space-x-2">
+                  <MapPin className="h-4 w-4 text-primary animate-pulse" />
+                  <span className="text-sm">Kerala</span>
                 </div>
-                <div className="flex items-center justify-between animate-hover-lift">
-                  <div className="flex items-center space-x-2">
-                    <MapPin className="h-4 w-4 text-primary animate-pulse" />
-                    <span className="text-sm">West Bengal</span>
-                  </div>
-                  <Badge variant="default" className="animate-hover-scale">15 stations</Badge>
+                <Badge variant="default" className="animate-hover-scale">18 stations</Badge>
+              </div>
+              <div className="flex items-center justify-between animate-hover-lift">
+                <div className="flex items-center space-x-2">
+                  <MapPin className="h-4 w-4 text-primary animate-pulse" />
+                  <span className="text-sm">West Bengal</span>
                 </div>
-                <div className="flex items-center justify-between animate-hover-lift">
-                  <div className="flex items-center space-x-2">
-                    <MapPin className="h-4 w-4 text-primary animate-pulse" />
-                    <span className="text-sm">Odisha</span>
-                  </div>
-                  <Badge variant="default" className="animate-hover-scale">12 stations</Badge>
+                <Badge variant="default" className="animate-hover-scale">15 stations</Badge>
+              </div>
+              <div className="flex items-center justify-between animate-hover-lift">
+                <div className="flex items-center space-x-2">
+                  <MapPin className="h-4 w-4 text-primary animate-pulse" />
+                  <span className="text-sm">Odisha</span>
                 </div>
-              </CardContent>
-            </Card>
-            
-            {/* Quick Actions Card */}
-            <Card className="animate-hover-lift bg-gradient-card">
-              <CardHeader>
-                <CardTitle>Quick Actions</CardTitle>
-                <CardDescription>Common monitoring tasks and shortcuts</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <button className="w-full p-3 bg-primary/10 hover:bg-primary/20 rounded-lg transition-all duration-300 animate-hover-scale flex items-center gap-3">
-                  <AlertTriangle className="h-5 w-5 text-primary" />
-                  <div className="text-left">
-                    <div className="font-medium text-sm">Report Emergency</div>
-                    <div className="text-xs text-muted-foreground">Submit critical hazard alert</div>
-                  </div>
-                </button>
-                <button className="w-full p-3 bg-accent/10 hover:bg-accent/20 rounded-lg transition-all duration-300 animate-hover-scale flex items-center gap-3">
-                  <MapPin className="h-5 w-5 text-accent" />
-                  <div className="text-left">
-                    <div className="font-medium text-sm">View Live Map</div>
-                    <div className="text-xs text-muted-foreground">Interactive hazard visualization</div>
-                  </div>
-                </button>
-                <button className="w-full p-3 bg-secondary/50 hover:bg-secondary/70 rounded-lg transition-all duration-300 animate-hover-scale flex items-center gap-3">
-                  <BarChart3 className="h-5 w-5 text-secondary-foreground" />
-                  <div className="text-left">
-                    <div className="font-medium text-sm">Generate Report</div>
-                    <div className="text-xs text-muted-foreground">Download analytics summary</div>
-                  </div>
-                </button>
-              </CardContent>
-            </Card>
-          </div>
+                <Badge variant="default" className="animate-hover-scale">12 stations</Badge>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Quick Actions Card (Reporting removed) */}
+          <Card className="animate-hover-lift bg-gradient-card">
+            <CardHeader>
+              <CardTitle>Quick Actions</CardTitle>
+              <CardDescription>Common monitoring tasks and shortcuts</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Link to="/map">
+                <Button variant="outline" className="w-full p-3 flex items-center gap-3">
+                  <MapPin className="h-5 w-5" /> View Live Map
+                </Button>
+              </Link>
+              <Link to="/analytics">
+                <Button variant="secondary" className="w-full p-3 flex items-center gap-3">
+                  <BarChart3 className="h-5 w-5" /> Analytics Summary
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
         </div>
 
 
         <div className="text-center text-sm text-muted-foreground bg-gradient-to-r from-transparent via-muted/20 to-transparent p-4 rounded-lg animate-fade-in">
           <div className="flex items-center justify-center gap-2">
             <Activity className="h-4 w-4 animate-pulse text-primary" />
-            Last updated: {dashboardStats.lastUpdate} | INCOIS Ocean Hazard Monitoring Platform
+            Last updated: {dashboardStats.lastUpdate} | INCOIS Ocean Hazard Platform
           </div>
         </div>
+      </div>
       </>
   );
 };

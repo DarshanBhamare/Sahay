@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+  <defs>
+    <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#92400e" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="url(#g)"/>
+  <g fill="#fde68a" opacity="0.5">
+    <circle cx="100" cy="100" r="40"/>
+    <circle cx="140" cy="120" r="30"/>
+  </g>
+  <g>
+    <path d="M0 360 Q160 320 320 360 T640 360 T960 360 V480 H0 Z" fill="#fcd34d"/>
+    <path d="M0 390 Q160 350 320 390 T640 390 T960 390 V480 H0 Z" fill="#f59e0b"/>
+  </g>
+  <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700" fill="#1f2937">Coastal Erosion</text>
+  <text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#111827">Dummy placeholder image</text>
+</svg>

@@ -23,7 +23,6 @@ import {
   Brain,
   Globe
 } from 'lucide-react';
-import WebsiteHeader from '@/components/WebsiteHeader';
 
 interface SocialPost {
   id: string;
@@ -51,100 +50,19 @@ interface SocialPost {
 
 const mockSocialPosts: SocialPost[] = [
   {
-    id: '1',
+    id: 'sample-1',
     platform: 'twitter',
-    user: {
-      name: 'Coastal Resident',
-      handle: '@coast_watch_gj',
-      verified: false,
-      followers: 1250
-    },
-    content: 'URGENT: Massive waves hitting Dwarka beach! Water level rising rapidly. Everyone evacuate immediately! #TsunamiAlert #Gujarat #Emergency',
-    timestamp: '2 minutes ago',
-    location: 'Dwarka, Gujarat',
-    metrics: { likes: 342, shares: 156, comments: 89 },
-    sentiment: 'negative',
-    riskLevel: 'critical',
-    categories: ['tsunami', 'evacuation', 'emergency'],
-    confidence: 95,
-    language: 'English'
-  },
-  {
-    id: '2',
-    platform: 'facebook',
-    user: {
-      name: 'Chennai Port Authority',
-      handle: '@chennaiport',
-      verified: true,
-      followers: 45000
-    },
-    content: 'Storm surge warning issued for Chennai coast. All fishing vessels advised to return to harbor immediately. Coast Guard on high alert.',
-    timestamp: '15 minutes ago',
+    user: { name: 'Sample User', handle: '@sample', verified: false, followers: 100 },
+    content: 'Sample post for initialization.',
+    timestamp: 'just now',
     location: 'Chennai, Tamil Nadu',
-    metrics: { likes: 234, shares: 89, comments: 45 },
+    metrics: { likes: 1, shares: 0, comments: 0 },
     sentiment: 'neutral',
-    riskLevel: 'high',
-    categories: ['storm-surge', 'official', 'warning'],
-    confidence: 88,
-    language: 'English'
-  },
-  {
-    id: '3',
-    platform: 'instagram',
-    user: {
-      name: 'Kerala Tourism',
-      handle: '@kerala_tourism',
-      verified: true,
-      followers: 2300000
-    },
-    content: 'Beautiful sunset at Kovalam beach today! Perfect conditions for visitors. Come experience God\'s Own Country! 🌅 #Kerala #Tourism #Beach',
-    timestamp: '1 hour ago',
-    location: 'Kovalam, Kerala',
-    metrics: { likes: 1205, shares: 45, comments: 78 },
-    sentiment: 'positive',
     riskLevel: 'low',
-    categories: ['tourism', 'positive'],
-    confidence: 92,
-    language: 'English'
+    categories: ['sample'],
+    confidence: 50,
+    language: 'English',
   },
-  {
-    id: '4',
-    platform: 'twitter',
-    user: {
-      name: 'West Bengal Fisher',
-      handle: '@fisherman_wb',
-      verified: false,
-      followers: 890
-    },
-    content: 'কলকাতার উপকূলে বন্যার পানি। অনেক এলাকা প্লাবিত। সরকারি সাহায্য প্রয়োজন। #WestBengal #Flooding #Help',
-    timestamp: '45 minutes ago',
-    location: 'Kolkata, West Bengal',
-    metrics: { likes: 67, shares: 23, comments: 12 },
-    sentiment: 'negative',
-    riskLevel: 'medium',
-    categories: ['flooding', 'help-needed'],
-    confidence: 78,
-    language: 'Bengali'
-  },
-  {
-    id: '5',
-    platform: 'youtube',
-    user: {
-      name: 'Mumbai Weather Update',
-      handle: '@mumbaiweather',
-      verified: false,
-      followers: 15600
-    },
-    content: 'Live: High tide warning for Mumbai coast. Marine Drive experiencing rough seas. Citizens advised to avoid coastal areas.',
-    timestamp: '30 minutes ago',
-    location: 'Mumbai, Maharashtra',
-    metrics: { likes: 189, shares: 34, comments: 56 },
-    sentiment: 'neutral',
-    riskLevel: 'medium',
-    categories: ['high-tide', 'warning'],
-    confidence: 85,
-    language: 'English'
-  }
 ];
 
 const SocialMonitor: React.FC = () => {
@@ -161,7 +79,7 @@ const SocialMonitor: React.FC = () => {
     const matchesPlatform = platformFilter === 'all' || post.platform === platformFilter;
     const matchesRisk = riskFilter === 'all' || post.riskLevel === riskFilter;
     const matchesSentiment = sentimentFilter === 'all' || post.sentiment === sentimentFilter;
-    const matchesLocation = locationFilter === 'all' || post.location?.includes(locationFilter);
+    const matchesLocation = locationFilter === 'all' || (post.location && post.location.includes(locationFilter));
     
     return matchesSearch && matchesPlatform && matchesRisk && matchesSentiment && matchesLocation;
   });
@@ -203,20 +121,19 @@ const SocialMonitor: React.FC = () => {
 
   return (
     <>
-      <WebsiteHeader />
       <div className="space-y-6 px-4 max-w-7xl mx-auto py-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">Social Media Monitor</h1>
-          <p className="text-muted-foreground">
-            Real-time monitoring of social media for ocean hazard information
-          </p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold">Social Media Monitor</h1>
+            <p className="text-muted-foreground">
+              Real-time monitoring of social media for ocean hazard information
+            </p>
+          </div>
+          <Button className="flex items-center gap-2">
+            <Target className="h-4 w-4" />
+            Create Alert Rule
+          </Button>
         </div>
-        <Button className="flex items-center gap-2">
-          <Target className="h-4 w-4" />
-          Create Alert Rule
-        </Button>
-      </div>
 
       {/* Filters */}
       <Card>

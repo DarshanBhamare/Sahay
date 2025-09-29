@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+  <defs>
+    <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0ea5e9" />
+      <stop offset="100%" stop-color="#1e3a8a" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="url(#g)"/>
+  <g fill="#fff" opacity="0.25">
+    <circle cx="120" cy="120" r="90"/>
+    <circle cx="160" cy="140" r="70"/>
+    <circle cx="200" cy="160" r="50"/>
+  </g>
+  <g>
+    <path d="M0 360 Q120 300 240 360 T480 360 T720 360 T960 360 V480 H0 Z" fill="#93c5fd"/>
+    <path d="M0 380 Q120 320 240 380 T480 380 T720 380 T960 380 V480 H0 Z" fill="#60a5fa"/>
+    <path d="M0 400 Q120 340 240 400 T480 400 T720 400 T960 400 V480 H0 Z" fill="#3b82f6"/>
+  </g>
+  <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700" fill="#ffffff">Tsunami Report</text>
+  <text x="50%" y="62%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#e0f2fe">Dummy placeholder image</text>
+</svg>

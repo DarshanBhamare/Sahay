@@ -161,6 +161,8 @@ const MapControls: React.FC<{
   onCenter: () => void;
   onLocate: () => void;
 }> = ({ onZoomIn, onZoomOut, onCenter, onLocate }) => {
+  const isDark = typeof document !== 'undefined' && document.documentElement.classList.contains('dark');
+
   return (
     <div className="absolute top-4 right-4 z-[1000] flex flex-col gap-2">
       <Button
@@ -221,15 +223,42 @@ const MapEventHandler: React.FC<{
   return null;
 };
 
-// Weather Layer Component
-const WeatherLayer: React.FC<{ show: boolean }> = ({ show }) => {
-  if (!show) return null;
-  
+// OpenWeather overlay layers (requires API key in Vite env)
+const OWM_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY as string | undefined;
+
+const WeatherLayer: React.FC<{ show: boolean; isDark: boolean }> = ({ show, isDark }) => {
+  if (!show || !OWM_KEY) return null;
   return (
     <TileLayer
-      url="https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=YOUR_OPENWEATHER_API_KEY"
-      opacity={0.6}
+      url={`https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=${OWM_KEY}`}
+      opacity={isDark ? 0.75 : 0.6}
+      zIndex={600}
       attribution="Weather data © OpenWeatherMap"
+    />
+  );
+};
+
+const WindLayer: React.FC<{ show: boolean; isDark: boolean }> = ({ show, isDark }) => {
+  if (!show || !OWM_KEY) return null;
+  return (
+    <TileLayer
+      url={`https://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=${OWM_KEY}`}
+      opacity={isDark ? 0.7 : 0.5}
+      zIndex={610}
+      attribution="Wind layer © OpenWeatherMap"
+    />
+  );
+};
+
+const WaveLayer: React.FC<{ show: boolean; isDark: boolean }> = ({ show, isDark }) => {
+  if (!show || !OWM_KEY) return null;
+  // Using clouds overlay as a visible proxy when no sea-state tiles are available
+  return (
+    <TileLayer
+      url={`https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${OWM_KEY}`}
+      opacity={isDark ? 0.6 : 0.35}
+      zIndex={620}
+      attribution="Clouds overlay © OpenWeatherMap"
     />
   );
 };
@@ -303,6 +332,17 @@ const InteractiveMap: React.FC = () => {
     return icons[type as keyof typeof icons] || '⚠️';
   };
 
+  const getReportImage = (type: string) => {
+    const images: Record<string, string> = {
+      'tsunami': '/images/hazards/tsunami.svg',
+      'storm-surge': '/images/hazards/storm-surge.svg',
+      'high-waves': '/images/hazards/high-waves.svg',
+      'flooding': '/images/hazards/flooding.svg',
+      'erosion': '/images/hazards/erosion.svg',
+    };
+    return images[type] || '/placeholder.svg';
+  };
+
   const getSeverityColor = (severity: number) => {
     if (severity >= 5) return 'bg-red-600';
     if (severity >= 4) return 'bg-orange-500';
@@ -360,18 +400,21 @@ const InteractiveMap: React.FC = () => {
     }
   }, [map]);
 
+  // Theme detection for overlay visibility in dark mode
+  const isDark = typeof document !== 'undefined' && document.documentElement.classList.contains('dark');
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-6">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Enhanced Header */}
         <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 p-8 text-white shadow-2xl">
-          <div className="absolute inset-0 bg-black/10" />
+          <div className="absolute inset-0 bg-black/30" />
           <div className="relative z-10 flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold mb-2">
+              <h1 className="text-4xl font-bold mb-2 drop-shadow-md">
                 🌊 Interactive Hazard Map
               </h1>
-              <p className="text-blue-100 text-lg">
+              <p className="text-white/90 text-lg drop-shadow-sm">
                 Real-time visualization of coastal hazards across the Indian Ocean
               </p>
               <div className="flex items-center gap-4 mt-4 text-sm">
@@ -533,45 +576,7 @@ const InteractiveMap: React.FC = () => {
               </CardContent>
             </Card>
 
-            {/* Enhanced Legend */}
-            <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm">
-              <CardHeader className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-t-lg">
-                <CardTitle className="flex items-center gap-2">
-                  <Info className="h-5 w-5" />
-                  Map Legend
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-6 space-y-4">
-                <div className="space-y-3">
-                  <div className="text-sm font-semibold text-gray-700">Severity Levels</div>
-                  {[5, 4, 3, 2, 1].map(level => (
-                    <div key={level} className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors">
-                      <div className={`w-4 h-4 rounded-full shadow-md ${getSeverityColor(level)}`} />
-                      <span className="text-sm font-medium">
-                        Level {level} - {
-                          level === 5 ? 'Critical' :
-                          level === 4 ? 'High' :
-                          level === 3 ? 'Medium' :
-                          level === 2 ? 'Low' : 'Minimal'
-                        }
-                      </span>
-                    </div>
-                  ))}
-                </div>
-                
-                <Separator />
-                
-                <div className="space-y-3">
-                  <div className="text-sm font-semibold text-gray-700">Hazard Types</div>
-                  {['tsunami', 'storm-surge', 'high-waves', 'flooding', 'erosion'].map(type => (
-                    <div key={type} className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors">
-                      <span className="text-lg">{getHazardIcon(type)}</span>
-                      <span className="text-sm font-medium capitalize">{type.replace('-', ' ')}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            {/* Map Legend removed as requested */}
           </div>
 
           {/* Main Map Area */}
@@ -591,8 +596,10 @@ const InteractiveMap: React.FC = () => {
                       attribution={getTileLayerAttribution(mapLayer)}
                     />
                     
-                    {/* Weather Layer */}
-                    <WeatherLayer show={showWeatherLayer} />
+                    {/* Overlay Layers */}
+                    <WeatherLayer show={showWeatherLayer} isDark={isDark} />
+                    <WindLayer show={showWindLayer} isDark={isDark} />
+                    <WaveLayer show={showWaveLayer} isDark={isDark} />
                     
                     {/* Hazard Markers */}
                     {filteredReports.map((report) => (
@@ -697,6 +704,14 @@ const InteractiveMap: React.FC = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-6">
+                  <div className="mb-6">
+                    <img
+                      src={getReportImage(selectedReport.type)}
+                      alt={`${selectedReport.type} report`}
+                      className="w-full h-48 object-cover rounded-md border"
+                      onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/placeholder.svg'; }}
+                    />
+                  </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-4">
                       <div className="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">

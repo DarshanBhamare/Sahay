@@ -56,13 +56,11 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
             variant="ghost"
             size="icon"
             onClick={onMenuClick}
-            className="lg:hidden"
             aria-label="Toggle menu"
           >
             <Menu className="h-5 w-5" />
           </Button>
 
-          {/* INCOIS Branding */}
           <div className="flex items-center gap-3">
             <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
               <span className="text-sm font-bold text-primary-foreground">IO</span>
