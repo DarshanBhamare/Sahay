@@ -19,7 +19,7 @@ import About from "./pages/About";
 
 const queryClient = new QueryClient();
 
-const App: React.FC = () => {
+const App: React.FC =() =>{
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
