@@ -143,7 +143,7 @@ const EnhancedMap: React.FC<EnhancedMapProps> = ({
               duration: 2000
             });
             
-            // Add user location marker
+        
             new mapboxgl.Marker({ color: '#22c55e' })
               .setLngLat([longitude, latitude])
               .setPopup(new mapboxgl.Popup().setHTML('<p>Your Location</p>'))
