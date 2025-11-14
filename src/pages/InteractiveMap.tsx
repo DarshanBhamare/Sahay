@@ -252,7 +252,6 @@ const WindLayer: React.FC<{ show: boolean; isDark: boolean }> = ({ show, isDark 
 
 const WaveLayer: React.FC<{ show: boolean; isDark: boolean }> = ({ show, isDark }) => {
   if (!show || !OWM_KEY) return null;
-  // Using clouds overlay as a visible proxy when no sea-state tiles are available
   return (
     <TileLayer
       url={`https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${OWM_KEY}`}
