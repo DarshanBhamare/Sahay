@@ -155,7 +155,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
             {children}
           </main>
 
-          {/* Bottom Toolbar - Mobile responsive */}
+    
           <div className="lg:hidden border-t bg-gradient-to-r from-emerald-700 to-teal-700 dark:from-slate-950 dark:to-slate-900 p-4 text-white">
             <div className="flex items-center justify-around">
               <NavLink
