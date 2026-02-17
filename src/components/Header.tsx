@@ -72,7 +72,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
           </div>
         </div>
 
-        {/* Right Section */}
+       
         <div className="flex items-center gap-2">
           {/* Theme Toggle */}
           <Button
